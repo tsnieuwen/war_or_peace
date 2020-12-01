@@ -1,5 +1,5 @@
 class Deck
-attr_reader :cards, :high_ranking_cards
+attr_reader :cards, :highest_ranking_cards
 
   def initialize(cards)
     @cards = cards
@@ -15,23 +15,28 @@ attr_reader :cards, :high_ranking_cards
       if card.rank >= 11
         @highest_ranking_cards << card
       end
+      @highest_ranking_cards = @highest_ranking_cards.uniq
     end
     return @highest_ranking_cards
   end
 
   def percent_high_ranking
 
-    num_high_ranking = @highest_ranking_cards.count
-    num_cards_total = @cards.count
+    num_high_ranking = highest_ranking_cards.count
+    num_cards_total = cards.count
     num_high_ranking = num_high_ranking.to_f
     num_cards_total = num_cards_total.to_f
-
-    return (num_high_ranking/num_cards_total)
+    answer = (num_high_ranking/num_cards_total) * 100.00
+    return answer.round(2)
 
   end
 
   def remove_card
-    @cards.delete(0)
+    if @cards[0].rank >= 11
+      @highest_ranking_cards.delete(@cards[0])
+    end
+    @cards.delete_at(0)
+
   end
 
   def add_card(added_card)
