@@ -24,9 +24,11 @@ attr_reader :cards
   end
 
   def remove_card
+    @cards.delete(0)
   end
 
-  def add_card
+  def add_card(added_card)
+    @cards << added_card
   end
 
 end
