@@ -22,8 +22,8 @@ attr_reader :cards, :highest_ranking_cards
 
   def percent_high_ranking
 
-    num_high_ranking = highest_ranking_cards.count
-    num_cards_total = cards.count
+    num_high_ranking = @highest_ranking_cards.count
+    num_cards_total = @cards.count
     num_high_ranking = num_high_ranking.to_f
     num_cards_total = num_cards_total.to_f
     answer = (num_high_ranking/num_cards_total) * 100.00
