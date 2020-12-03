@@ -59,9 +59,16 @@ attr_reader :player1,
   end
 
   def award_spoils
-    if @winner == player1.name
-      player.deck << turn.spoils_of_war
+    if @winner = player1.name
+      @spoils_of_war.each do |spoil|
+        player1.deck.cards << spoil
+      end
+    elsif @winner = player2.name
+      @spoils_of_war.each do |spoil|
+        player2.deck.cards << spoil
+      end
     end
+    @spoils_of_war.clear
   end
 
 end
