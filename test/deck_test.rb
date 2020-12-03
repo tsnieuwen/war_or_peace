@@ -57,7 +57,7 @@ class DeckTest < Minitest::Test
     deck.high_ranking_cards
     assert_equal 66.67, deck.percent_high_ranking
   end
-
+  
   def test_remove_card
     card1 = Card.new(:diamond, "Queen", 12)
     card2 = Card.new(:spade, "3", 3)
