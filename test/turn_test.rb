@@ -123,9 +123,10 @@ class TurnTest < Minitest::Test
     turn.type
     turn.pile_cards
     turn.award_spoils
-    expected = @spoils_of_war
+    expected = player1.deck
+    # expected_player1 =
 
-    assert_equal expected, turn.spoils_of_war
+    assert_equal expected, turn.player1.deck
   end
 
 end

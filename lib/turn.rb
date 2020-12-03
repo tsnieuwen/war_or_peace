@@ -60,10 +60,8 @@ attr_reader :player1,
 
   def award_spoils
     if @winner == player1.name
-      
+      player.deck << turn.spoils_of_war
+    end
   end
-
-
-
 
 end
