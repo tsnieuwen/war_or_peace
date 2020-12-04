@@ -2,6 +2,7 @@ require './lib/card'
 require './lib/deck'
 require './lib/player'
 require './lib/turn'
+require './lib/game'
 
 card1 = Card.new(:heart, "2", 2)
 card2 = Card.new(:heart, "3", 3)
@@ -59,7 +60,44 @@ ordered_deck = [card1, card2, card3, card4, card5, card6, card7, card8, card9, c
 shuffled_deck = ordered_deck.shuffle
 deck1 = shuffled_deck[0..25]
 deck2 = shuffled_deck[26..51]
+# deck1 = [card1,card2,card3,card4,card5,card6]
+# deck2 = [card7,card8,card9,card10,card11,card12]
+
 playing_deck1 = Deck.new(deck1)
 playing_deck2 = Deck.new(deck2)
-player1 = Player.new("Ricky", deck1)
-player2 = Player.new("Bobby", deck2)
+
+player1 = Player.new("Ricky", playing_deck1)
+player2 = Player.new("Bobby", playing_deck2)
+turn = Turn.new(player1, player2)
+game = Game.new#(player1, player2)
+# game.start
+
+puts game.start
+turn_counter = 0
+100.times {
+turn_counter += 1
+  if turn.type == :basic
+    puts "Turn #{turn_counter}: #{turn.winner.name} won 2 cards"
+  elsif turn.type == :war
+    puts "Turn #{turn_counter}: #{turn.winner.name} won 6 cards"
+  else
+    puts "Turn #{turn_counter}: *mutually assured destruction* 6 cards removed from play"
+  end
+  turn.pile_cards
+  turn.award_spoils
+  if player1.has_lost? == true
+    puts "*-*-*-* #{player2.name} has won the game! *-*-*-*"
+  end
+  break if player1.has_lost? == true
+  if player2.has_lost? == true
+    puts "*-*-*-* #{player1.name} has won the game! *-*-*-*"
+  end
+  break if player2.has_lost? == true
+
+  if turn_counter == 1000000
+    puts "---- DRAW ----"
+  end
+  puts player1.deck.cards.count
+  puts player2.deck.cards.count
+
+}
