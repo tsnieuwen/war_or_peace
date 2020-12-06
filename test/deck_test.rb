@@ -7,7 +7,6 @@ class DeckTest < Minitest::Test
 
 
   def test_it_exists
-
     card1 = Card.new(:diamond, "Queen", 12)
     card2 = Card.new(:spade, "3", 3)
     card3 = Card.new(:heart, "Ace", 14)
@@ -35,8 +34,8 @@ class DeckTest < Minitest::Test
     card3 = Card.new(:heart, "Ace", 14)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
-    assert_equal 12, deck.rank_of_card_at(0)
 
+    assert_equal 12, deck.rank_of_card_at(0)
   end
 
   def test_high_ranking_cards
@@ -45,6 +44,7 @@ class DeckTest < Minitest::Test
     card3 = Card.new(:heart, "Ace", 14)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
+
     assert_equal [card1, card3], deck.high_ranking_cards
   end
 
@@ -55,6 +55,7 @@ class DeckTest < Minitest::Test
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
     deck.high_ranking_cards
+
     assert_equal 66.67, deck.percent_high_ranking
   end
 
@@ -64,7 +65,10 @@ class DeckTest < Minitest::Test
     card3 = Card.new(:heart, "Ace", 14)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
-    assert_equal card1, deck.remove_card
+    deck.remove_card
+    expected = [card2, card3]
+
+    assert_equal expected, deck.cards
   end
 
   def test_add_card
@@ -74,7 +78,10 @@ class DeckTest < Minitest::Test
     card4 = Card.new(:diamond, "9", 9)
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
-    assert_equal [card1, card2, card3, card4], deck.add_card(card4)
+    expected = [card1, card2, card3, card4]
+    deck.add_card(card4)
+
+    assert_equal expected, deck.cards
   end
 
 end
