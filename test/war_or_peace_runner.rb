@@ -60,21 +60,17 @@ ordered_deck = [card1, card2, card3, card4, card5, card6, card7, card8, card9, c
 shuffled_deck = ordered_deck.shuffle
 deck1 = shuffled_deck[0..25]
 deck2 = shuffled_deck[26..51]
-# deck1 = [card1,card2,card3,card4,card5,card6]
-# deck2 = [card7,card8,card9,card10,card11,card12]
-
 playing_deck1 = Deck.new(deck1)
 playing_deck2 = Deck.new(deck2)
-
-player1 = Player.new("Ricky", playing_deck1)
-player2 = Player.new("Bobby", playing_deck2)
+player1 = Player.new("Megan", playing_deck1)
+player2 = Player.new("Aurora", playing_deck2)
 turn = Turn.new(player1, player2)
-game = Game.new#(player1, player2)
-# game.start
+game = Game.new
 
 puts game.start
+
 turn_counter = 0
-100.times {
+1000000.times {
 turn_counter += 1
   if turn.type == :basic
     puts "Turn #{turn_counter}: #{turn.winner.name} won 2 cards"
@@ -93,11 +89,7 @@ turn_counter += 1
     puts "*-*-*-* #{player1.name} has won the game! *-*-*-*"
   end
   break if player2.has_lost? == true
-
   if turn_counter == 1000000
     puts "---- DRAW ----"
   end
-  puts player1.deck.cards.count
-  puts player2.deck.cards.count
-
 }

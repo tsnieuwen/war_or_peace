@@ -50,6 +50,7 @@ class TurnTest < Minitest::Test
 
     assert_equal player1, turn.player1
     assert_equal player2, turn.player2
+    assert_equal [], turn.spoils_of_war
   end
 
   def test_type_basic
@@ -136,7 +137,6 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
-    turn.type
 
     assert_equal player1, turn.winner
   end
@@ -159,7 +159,6 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck3)
     turn = Turn.new(player1, player2)
-    turn.type
 
     assert_equal player2, turn.winner
   end
@@ -182,7 +181,6 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck4)
     turn = Turn.new(player1, player2)
-    turn.type
 
     assert_equal "No Winner", turn.winner
   end
@@ -205,11 +203,13 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
-    turn.type
     turn.pile_cards
-
+    expected_player1_deck = [card2,  card5, card8]
+    expected_player2_deck = [card4, card6, card7]
     expected_spoils_pile = [card1, card3]
 
+    assert_equal expected_player1_deck, player1.deck.cards
+    assert_equal expected_player2_deck, player2.deck.cards
     assert_equal expected_spoils_pile, turn.spoils_of_war
   end
 
@@ -231,11 +231,13 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck3)
     turn = Turn.new(player1, player2)
-    turn.type
     turn.pile_cards
-
+    expected_player1_deck = [card8]
+    expected_player2_deck = [card7]
     expected_spoils_pile = [card1, card2, card5, card9, card4, card6]
 
+    assert_equal expected_player1_deck, player1.deck.cards
+    assert_equal expected_player2_deck, player2.deck.cards
     assert_equal expected_spoils_pile, turn.spoils_of_war
   end
 
@@ -257,7 +259,6 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck4)
     turn = Turn.new(player1, player2)
-    turn.type
     turn.pile_cards
     expected_player1_deck = [card8]
     expected_player2_deck = [card7]
@@ -284,12 +285,11 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
-    turn.type
     turn.winner
     turn.pile_cards
     turn.award_spoils
     expected1 = [card2, card5, card8, card1, card3]
-    expected2 = [card4, card6, card7,]
+    expected2 = [card4, card6, card7]
     expected_spoils = []
 
     assert_equal expected1, turn.player1.deck.cards
@@ -315,7 +315,6 @@ class TurnTest < Minitest::Test
     player1 = Player.new("Megan", deck1)
     player2 = Player.new("Aurora", deck3)
     turn = Turn.new(player1, player2)
-    turn.type
     turn.winner
     turn.pile_cards
     turn.award_spoils

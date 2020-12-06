@@ -5,7 +5,6 @@ require './lib/card'
 
 class DeckTest < Minitest::Test
 
-
   def test_it_exists
     card1 = Card.new(:diamond, "Queen", 12)
     card2 = Card.new(:spade, "3", 3)
@@ -17,7 +16,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_it_has_readable_cards_attribute
-
     card1 = Card.new(:diamond, "Queen", 12)
     card2 = Card.new(:spade, "3", 3)
     card3 = Card.new(:heart, "Ace", 14)
@@ -28,7 +26,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_shows_rank_of_card
-
     card1 = Card.new(:diamond, "Queen", 12)
     card2 = Card.new(:spade, "3", 3)
     card3 = Card.new(:heart, "Ace", 14)
